@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button"; // shadcn Button
 import Link from "next/link";
-
+import Googleicon from "../icons/google";
+import EmailIcon from "../icons/email";
 export default function Authpage() {
   return (
     <div className="backdrop-blur-lg min-h-screen flex items-center justify-center">
@@ -13,10 +14,11 @@ export default function Authpage() {
         </p>
         <div className="w-full flex flex-col gap-4">
           <Button variant="outline" className="w-full">
-            {/* Google icon can be added here if using an icon library */}
+            <Googleicon/>
             Continue with Google
           </Button>
           <Button className="w-full bg-blue-700">
+            <EmailIcon/>
             Login with Email
           </Button>
         </div>

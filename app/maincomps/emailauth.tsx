@@ -10,16 +10,16 @@ export default function EmailAuth() {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg px-8 py-10 w-full max-w-md flex flex-col">
-        {/* Back link */}
+
         <Link href="#" className="text-gray-500 text-sm mb-4 hover:underline flex items-center gap-1">
           &larr; Back
         </Link>
-        {/* Heading */}
+
         <h1 className="text-xl font-semibold mb-1">Login with email</h1>
         <p className="text-gray-600 text-sm mb-6">
           Login using your email address.
         </p>
-        {/* Form Fields */}
+
         <form className="flex flex-col gap-4">
           <input
             type="text"
@@ -48,7 +48,7 @@ export default function EmailAuth() {
             Login
           </Button>
         </form>
-        {/* Bottom text */}
+
         <div className="mt-6 text-sm text-gray-700 flex justify-between">
           <Link href="#" className="underline hover:text-blue-600">
             Forgot password

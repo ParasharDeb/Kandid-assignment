@@ -68,7 +68,6 @@ export default function Register() {
             Create my account
           </Button>
         </form>
-        {/* Bottom text */}
         <div className="mt-6 text-sm text-gray-700 text-center">
           Already have an account?{" "}
           <Link href="#" className="underline hover:text-blue-600">
