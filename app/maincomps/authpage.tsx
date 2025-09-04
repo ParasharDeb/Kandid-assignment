@@ -3,10 +3,10 @@
 import { Button } from "@/components/ui/button"; // shadcn Button
 import Link from "next/link";
 
-export default function Signup() {
+export default function Authpage() {
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="bg-white shadow-md rounded-lg px-5 py-10 w-full max-w-md flex flex-col items-center">
+    <div className="backdrop-blur-lg min-h-screen flex items-center justify-center">
+      <div className="bg-white shadow-md rounded-2xl px-5 py-10 w-full max-w-md flex flex-col items-center">
         <h1 className="text-xl font-semibold mb-2">Continue with an account</h1>
         <p className="text-gray-600 text-sm mb-6 text-center">
           You must log in or register to continue.
