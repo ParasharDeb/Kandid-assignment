@@ -1,11 +1,13 @@
-'use client'
+'use client';
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Eyeicon } from "../icons/eye";
+import { useAuthStore } from "../store/useAuthStore";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
+  const showOnly = useAuthStore((state) => state.showOnly);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -14,19 +16,21 @@ export default function Register() {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg px-8 py-10 w-full max-w-md flex flex-col">
-        {/* Back link */}
-        <Link
-          href="#"
+
+        {/* Back button */}
+        <button
+          onClick={() => showOnly("auth")}
           className="text-gray-500 text-sm mb-4 hover:underline flex items-center gap-1"
+          type="button"
         >
           &larr; Back
-        </Link>
-        {/* Heading */}
+        </button>
+
         <h1 className="text-xl font-semibold mb-1">Register with email</h1>
         <p className="text-gray-600 text-sm mb-6">
           Register using your email address.
         </p>
-        {/* Form Fields */}
+
         <form className="flex flex-col gap-4">
           <div className="flex gap-3">
             <input
@@ -68,11 +72,16 @@ export default function Register() {
             Create my account
           </Button>
         </form>
+
         <div className="mt-6 text-sm text-gray-700 text-center">
           Already have an account?{" "}
-          <Link href="#" className="underline hover:text-blue-600">
+          <button
+            onClick={() => showOnly("email")}
+            className="underline hover:text-blue-600"
+            type="button"
+          >
             Login
-          </Link>
+          </button>
         </div>
       </div>
     </div>

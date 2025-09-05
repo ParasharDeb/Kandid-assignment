@@ -1,19 +1,26 @@
-'use client'
+'use client';
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Eyeicon } from "../icons/eye";
+import { useAuthStore } from "../store/useAuthStore";
 
 export default function EmailAuth() {
   const [showPassword, setShowPassword] = useState(false);
+  const showOnly = useAuthStore((state) => state.showOnly);
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg px-8 py-10 w-full max-w-md flex flex-col">
 
-        <Link href="#" className="text-gray-500 text-sm mb-4 hover:underline flex items-center gap-1">
+        {/* Back button */}
+        <button
+          onClick={() => showOnly("auth")}
+          className="text-gray-500 text-sm mb-4 hover:underline flex items-center gap-1"
+          type="button"
+        >
           &larr; Back
-        </Link>
+        </button>
 
         <h1 className="text-xl font-semibold mb-1">Login with email</h1>
         <p className="text-gray-600 text-sm mb-6">
@@ -24,15 +31,13 @@ export default function EmailAuth() {
           <input
             type="text"
             placeholder="Email or Username"
-            className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm "
-            
+            className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm"
           />
           <div className="relative w-full">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm pr-10"
-             
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
@@ -40,6 +45,9 @@ export default function EmailAuth() {
               role="button"
               tabIndex={0}
               aria-label={showPassword ? "Hide password" : "Show password"}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") setShowPassword(!showPassword);
+              }}
             >
               <Eyeicon />
             </span>
@@ -54,9 +62,13 @@ export default function EmailAuth() {
             Forgot password
           </Link>
           <span className="mx-2 text-gray-300">|</span>
-          <Link href="#" className="underline hover:text-blue-600">
+          <button
+            onClick={() => showOnly("register")}
+            className="underline hover:text-blue-600"
+            type="button"
+          >
             Create New Account
-          </Link>
+          </button>
         </div>
       </div>
     </div>
