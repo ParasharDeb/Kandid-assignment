@@ -1,5 +1,4 @@
 'use client'
-
 import { Button } from "@/components/ui/button"; // shadcn Button
 import Link from "next/link";
 import Googleicon from "../icons/google";
@@ -43,4 +42,3 @@ export default function Authpage() {
     </div>
   );
 }
-5

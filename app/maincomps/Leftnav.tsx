@@ -40,7 +40,7 @@ export default function LeftNavigation() {
           <li>
             <Link href="#" className="flex items-center px-3 py-2 gap-2 text-gray-700">
               Messages
-              <span className="ml-2 bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">10+</span>
+              
             </Link>
           </li>
           <li>
