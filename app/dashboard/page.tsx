@@ -4,8 +4,6 @@ import TopNavigation from "../maincomps/topnav";
 import CampDashboard from "../maincomps/dashboard-campaigns";
 import LinkedinAccs from "../maincomps/dashboard-linkedin";
 import RecentDashboard from "../maincomps/dashboard-recents";
-import { useState } from "react";
-
 export default function Dashboard() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col md:flex-row">
