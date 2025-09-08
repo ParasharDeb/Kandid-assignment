@@ -1,14 +1,17 @@
-'use client';
+'use client'
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Eyeicon } from "../icons/eye";
 import { useAuthStore } from "../store/useAuthStore";
+import { signUp } from "@/server/users";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const showOnly = useAuthStore((state) => state.showOnly);
-
+  const [firstname,setFirstName]=useState("")
+  const [lastname,setlastName]=useState("")
+  const [password,setPassword]=useState("")
+  const [email,setEmail]=useState("")
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -16,7 +19,6 @@ export default function Register() {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg px-8 py-10 w-full max-w-md flex flex-col">
-
         {/* Back button */}
         <button
           onClick={() => showOnly("auth")}
@@ -37,23 +39,28 @@ export default function Register() {
               type="text"
               placeholder="First Name"
               className="border border-gray-300 rounded-lg px-3 py-2 w-1/2 text-sm"
+              onChange={(e)=>{setFirstName(e.target.value)}}
             />
             <input
               type="text"
               placeholder="Last Name"
               className="border border-gray-300 rounded-lg px-3 py-2 w-1/2 text-sm"
+              onChange={(e)=>{setlastName(e.target.value)}}
             />
           </div>
           <input
             type="email"
             placeholder="Email"
             className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm"
+            onChange={(e)=>{setEmail(e.target.value)}}
+
           />
           <div className="relative w-full">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm pr-10"
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <span
               onClick={togglePasswordVisibility}
@@ -68,7 +75,12 @@ export default function Register() {
               <Eyeicon />
             </span>
           </div>
-          <Button className="w-full bg-blue-700 hover:bg-blue-700 text-white rounded-full mt-2">
+          <Button className="w-full bg-blue-700 hover:bg-blue-700 text-white rounded-full mt-2"
+          onClick={async (e) => {
+            e.preventDefault();
+            await signUp(email, password, firstname, lastname);
+          }}
+          >
             Create my account
           </Button>
         </form>
