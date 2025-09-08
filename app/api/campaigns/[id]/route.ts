@@ -34,3 +34,13 @@ export async function DELETE(_request: Request, { params }: { params: { id: stri
 }
 
 
+export async function POST(_request: Request, { params }: { params: { id: string } }) {
+  try {
+    const id = Number(params.id);
+    const body = await _request.json();
+    const [created] = await db.insert(campaigns).values(body).returning();
+    return NextResponse.json({ campaign: created });
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to create campaign" }, { status: 500 });
+  }
+}

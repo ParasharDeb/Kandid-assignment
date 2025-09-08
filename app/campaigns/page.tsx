@@ -1,8 +1,7 @@
-// app/dashboard/campaigns/page.tsx
 'use client';
 import LeftNavigation from '../maincomps/Leftnav';
 import { useEffect, useMemo, useState } from 'react';
-
+import ProfileIcon from '../icons/profile';
 const STATUS_OPTIONS = ['All Campaigns', 'Active', 'Inactive', 'Draft', 'Paused', 'Completed'];
 
 type Campaign = {
@@ -150,13 +149,10 @@ export default function CampaignsPage() {
                       </td>
                       {/* Total Leads */}
                       <td className="px-4 py-2 text-center flex items-center justify-center gap-1">
-                        <span className="inline-block text-gray-600">
-                          <svg className="inline w-4 h-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path d="M15 19a3 3 0 1 0-6 0M7 10V5a5 5 0 1 1 10 0v5" />
-                            <circle cx="12" cy="19" r="3"/>
-                          </svg>
-                          {campaign.totalLeads}
-                        </span>
+                        <div className="inline-block text-gray-600 flex items-center gap-1">
+                          <div><ProfileIcon/></div>
+                          <div>{campaign.totalLeads}</div>
+                        </div>
                       </td>
                       {/* Request Status */}
                       <td className="px-4 py-2 text-center">
@@ -192,13 +188,13 @@ export default function CampaignsPage() {
                       {/* Actions */}
                       <td className="px-4 py-2 text-center">
                         <div className="flex gap-2 justify-center">
-                          <button className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-blue-600">Edit</button>
+                          <button className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-blue-600 cursor-pointer">Edit</button>
                           {campaign.status === 'Active' ? (
-                            <button onClick={() => handlePauseResume(campaign)} className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-yellow-600">Pause</button>
+                            <button onClick={() => handlePauseResume(campaign)} className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-yellow-600 cursor-pointer">Pause</button>
                           ) : (
-                            <button onClick={() => handlePauseResume(campaign)} className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-green-600">Resume</button>
+                            <button onClick={() => handlePauseResume(campaign)} className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-green-600 cursor-pointer">Resume</button>
                           )}
-                          <button onClick={() => handleDelete(campaign)} className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-red-600">Delete</button>
+                          <button onClick={() => handleDelete(campaign)} className="px-2 py-1 text-xs text-gray-500 bg-gray-50 border rounded hover:text-red-400 cursor-pointer">Delete</button>
                         </div>
                       </td>
                     </tr>
