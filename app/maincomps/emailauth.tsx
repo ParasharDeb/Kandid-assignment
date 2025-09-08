@@ -4,11 +4,16 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Eyeicon } from "../icons/eye";
 import { useAuthStore } from "../store/useAuthStore";
-
+import { signIn } from "@/server/users";
+import { useRouter } from "next/navigation";
 export default function EmailAuth() {
   const [showPassword, setShowPassword] = useState(false);
   const showOnly = useAuthStore((state) => state.showOnly);
-
+  const [email,setEmail]=useState("")
+  const [password,setPassword]=useState("")
+  const [error, setError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const Router=useRouter();
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="bg-white shadow-md rounded-lg px-8 py-10 w-full max-w-md flex flex-col">
@@ -27,17 +32,41 @@ export default function EmailAuth() {
           Login using your email address.
         </p>
 
-        <form className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={async (e) => {
+          e.preventDefault();
+          setError(null);
+          const cleanEmail = email.trim();
+          const cleanPassword = password.trim();
+          if (!cleanEmail || !cleanPassword) {
+            setError("Email and password are required.");
+            return;
+          }
+          setIsSubmitting(true);
+          try {
+            await signIn(cleanEmail, cleanPassword);
+            Router.push("/dashboard");
+          } catch (err) {
+            setError("Invalid email or password.");
+            // eslint-disable-next-line no-console
+            console.error(err);
+          } finally {
+            setIsSubmitting(false);
+          }
+        }}>
           <input
-            type="text"
-            placeholder="Email or Username"
+            type="email"
+            placeholder="Email"
             className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm"
+            value={email}
+            onChange={(e)=>{setEmail(e.target.value)}}
           />
           <div className="relative w-full">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm pr-10"
+              value={password}
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <span
               onClick={() => setShowPassword(!showPassword)}
@@ -52,7 +81,10 @@ export default function EmailAuth() {
               <Eyeicon />
             </span>
           </div>
-          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full mt-2 text-base py-[10px]">
+          {error && (
+            <p className="text-red-600 text-sm" role="alert">{error}</p>
+          )}
+          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-full mt-2 text-base py-[10px]" type="submit" disabled={isSubmitting}>
             Login
           </Button>
         </form>
