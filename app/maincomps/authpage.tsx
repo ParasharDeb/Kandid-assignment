@@ -1,12 +1,16 @@
 'use client';
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Googleicon from "../icons/google";
 import EmailIcon from "../icons/email";
 import { useAuthStore } from "../store/useAuthStore";
+import { signInGoogle } from "@/lib/auth-client";
 
 export default function Authpage() {
   const showOnly = useAuthStore((state) => state.showOnly);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <div className="backdrop-blur-lg min-h-screen flex items-center justify-center">
@@ -16,10 +20,33 @@ export default function Authpage() {
           You must log in or register to continue.
         </p>
         <div className="w-full flex flex-col gap-4">
-          <Button variant="outline" className="w-full">
+          <Button
+            variant="outline"
+            className="w-full"
+            type="button"
+            disabled={isSubmitting}
+            aria-busy={isSubmitting}
+            onClick={async () => {
+              setError(null);
+              setIsSubmitting(true);
+              try {
+                await signInGoogle();
+              } catch (err) {
+                const message = err instanceof Error ? err.message : "Google sign-in failed.";
+                setError(message);
+                // eslint-disable-next-line no-console
+                console.error(err);
+              } finally {
+                setIsSubmitting(false);
+              }
+            }}
+          >
             <Googleicon />
-            Continue with Google
+            {isSubmitting ? "Continuing..." : "Continue with Google"}
           </Button>
+          {error && (
+            <p className="text-red-600 text-sm" role="alert">{error}</p>
+          )}
           <Button
             className="w-full bg-blue-700"
             onClick={() => showOnly("email")}
