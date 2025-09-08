@@ -1,5 +1,5 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
-
+import { pgTable, text, timestamp, boolean, integer, pgEnum } from "drizzle-orm/pg-core";
+const campaignStatus = pgEnum("campaign_status", ["active", "inactive"]);
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name"),
@@ -13,7 +13,6 @@ export const user = pgTable("user", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
-
 export const session = pgTable("session", {
   id: text("id").primaryKey(),
   expiresAt: timestamp("expires_at").notNull(),
@@ -28,7 +27,6 @@ export const session = pgTable("session", {
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
 });
-
 export const account = pgTable("account", {
   id: text("id").primaryKey(),
   accountId: text("account_id").notNull(),
@@ -48,7 +46,6 @@ export const account = pgTable("account", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
-
 export const verification = pgTable("verification", {
   id: text("id").primaryKey(),
   identifier: text("identifier").notNull(),
@@ -60,4 +57,23 @@ export const verification = pgTable("verification", {
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
-export const schema={user,session,account,verification};
+export const campaigns = pgTable("campaigns", {
+  id: integer("id").primaryKey(),
+  name: text("name").notNull(),
+  status: campaignStatus("status").notNull(),
+  totalLeads: integer("total_leads").notNull(),
+  requestSuccess: integer("request_success").notNull(),
+  requestPending: integer("request_pending").notNull(),
+  requestDenied: integer("request_denied").notNull(),
+  connectionStatus: integer("connection_status").notNull(),
+  connectionMessage: integer("connection_message").notNull(),
+});
+export const Leads = pgTable("leads", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  title: text("title").notNull(),
+  campaignName: text("campaign_name").notNull(),
+  additionalInfo: text("additional_info").notNull(),
+  status: text("status").notNull(),
+});
+export const schema={user,session,account,verification,campaigns,Leads};
