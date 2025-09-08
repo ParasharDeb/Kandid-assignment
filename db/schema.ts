@@ -1,5 +1,11 @@
-import { pgTable, text, timestamp, boolean, integer, pgEnum } from "drizzle-orm/pg-core";
-const campaignStatus = pgEnum("campaign_status", ["active", "inactive"]);
+import { pgTable, text, timestamp, boolean, integer, pgEnum, serial, varchar } from "drizzle-orm/pg-core";
+export const campaignStatus = pgEnum("campaign_status", [
+  "Draft",
+  "Active",
+  "Paused",
+  "Completed",
+]);
+
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: text("name"),
@@ -58,16 +64,16 @@ export const verification = pgTable("verification", {
     .notNull(),
 });
 export const campaigns = pgTable("campaigns", {
-  id: integer("id").primaryKey(),
-  name: text("name").notNull(),
-  status: campaignStatus("status").notNull(),
-  totalLeads: integer("total_leads").notNull(),
-  requestSuccess: integer("request_success").notNull(),
-  requestPending: integer("request_pending").notNull(),
-  requestDenied: integer("request_denied").notNull(),
-  connectionStatus: integer("connection_status").notNull(),
-  connectionMessage: integer("connection_message").notNull(),
+  id: serial("id").primaryKey(),
+  campaignName: varchar("campaign_name", { length: 255 }).notNull(),
+  status: campaignStatus("status").notNull().default("Draft"),
+  totalLeads: integer("total_leads").default(0).notNull(),
+  successfulLeads: integer("successful_leads").default(0).notNull(),
+  responseRate: integer("response_rate").default(0).notNull(), 
+  progress: integer("progress").default(0).notNull(), 
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
 export const Leads = pgTable("leads", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
