@@ -23,31 +23,42 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ campaigns: results });
   } catch (error) {
+    const errMsg = error instanceof Error ? error.message : "Failed to fetch campaigns";
     console.error('[GET /api/campaigns] error', error);
-    return NextResponse.json({ error: "Failed to fetch campaigns" }, { status: 500 });
+    return NextResponse.json({ error: errMsg }, { status: 500 });
   }
 }
 
+type CampaignInsert = typeof campaigns.$inferInsert;
+
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const campaignName = (body?.campaignName || '').toString().trim();
-    if (!campaignName) {
+    const body: unknown = await request.json();
+    // Type guard for expected body shape
+    if (
+      !body ||
+      typeof body !== "object" ||
+      !("campaignName" in body) ||
+      typeof (body as { campaignName: unknown }).campaignName !== "string"
+    ) {
       return NextResponse.json({ error: 'campaignName is required' }, { status: 400 });
     }
-    const values: Partial<typeof campaigns.$inferInsert> = {
+    const b = body as Partial<CampaignInsert>;
+    const campaignName = (b.campaignName || '').toString().trim();
+    const values: Partial<CampaignInsert> = {
       campaignName,
-      status: (body?.status || 'Draft') as any,
-      totalLeads: typeof body?.totalLeads === 'number' ? body.totalLeads : 0,
-      successfulLeads: typeof body?.successfulLeads === 'number' ? body.successfulLeads : 0,
-      responseRate: typeof body?.responseRate === 'number' ? body.responseRate : 0,
-      progress: typeof body?.progress === 'number' ? body.progress : 0,
+      status: (b.status || 'Draft') as CampaignInsert["status"],
+      totalLeads: typeof b.totalLeads === 'number' ? b.totalLeads : 0,
+      successfulLeads: typeof b.successfulLeads === 'number' ? b.successfulLeads : 0,
+      responseRate: typeof b.responseRate === 'number' ? b.responseRate : 0,
+      progress: typeof b.progress === 'number' ? b.progress : 0,
     };
     const [created] = await db.insert(campaigns).values(values).returning();
     return NextResponse.json({ campaign: created }, { status: 201 });
   } catch (error) {
+    const errMsg = error instanceof Error ? error.message : 'Failed to create campaign';
     console.error('[POST /api/campaigns] error', error);
-    return NextResponse.json({ error: 'Failed to create campaign' }, { status: 500 });
+    return NextResponse.json({ error: errMsg }, { status: 500 });
   }
 }
 

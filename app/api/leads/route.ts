@@ -16,19 +16,18 @@ export async function GET(request: Request) {
 
     let results = await db.select().from(Leads);
     if (campaign) {
-      results = results.filter(l => l.campaignName === campaign);
+      results = results.filter(l => l.campaign === campaign);
     }
     if (search) {
       results = results.filter(l =>
         l.name.toLowerCase().includes(search) ||
-        l.campaignName.toLowerCase().includes(search)
+        (l.campaign ?? '').toLowerCase().includes(search)
       );
     }
     return NextResponse.json({ leads: results });
-  } catch (error: any) {
+  } catch (error) {
+    const errMsg = error instanceof Error ? error.message : 'Failed to fetch leads';
     console.error('[GET /api/leads] error', error);
-    return NextResponse.json({ error: error?.message || 'Failed to fetch leads' }, { status: 500 });
+    return NextResponse.json({ error: errMsg }, { status: 500 });
   }
 }
-
-
