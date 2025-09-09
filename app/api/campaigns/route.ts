@@ -1,11 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db/drizzle";
 import { campaigns } from "@/db/schema";
+import { eq } from "drizzle-orm";
+
+// Type inferred for inserting new campaigns
+type CampaignInsert = typeof campaigns.$inferInsert;
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status");
@@ -29,12 +33,10 @@ export async function GET(request: Request) {
   }
 }
 
-type CampaignInsert = typeof campaigns.$inferInsert;
-
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
     const body: unknown = await request.json();
-    // Type guard for expected body shape
+
     if (
       !body ||
       typeof body !== "object" ||
@@ -43,17 +45,21 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json({ error: 'campaignName is required' }, { status: 400 });
     }
-    const b = body as Partial<CampaignInsert>;
-    const campaignName = (b.campaignName || '').toString().trim();
-    const values: Partial<CampaignInsert> = {
+
+    const b = body as Record<string, unknown>;
+    const campaignName = (b.campaignName as string).trim();
+
+    const values: CampaignInsert = {
       campaignName,
-      status: (b.status || 'Draft') as CampaignInsert["status"],
-      totalLeads: typeof b.totalLeads === 'number' ? b.totalLeads : 0,
-      successfulLeads: typeof b.successfulLeads === 'number' ? b.successfulLeads : 0,
-      responseRate: typeof b.responseRate === 'number' ? b.responseRate : 0,
-      progress: typeof b.progress === 'number' ? b.progress : 0,
+      status: (typeof b.status === "string" ? b.status : "Draft") as CampaignInsert["status"],
+      totalLeads: typeof b.totalLeads === "number" ? b.totalLeads : 0,
+      successfulLeads: typeof b.successfulLeads === "number" ? b.successfulLeads : 0,
+      responseRate: typeof b.responseRate === "number" ? b.responseRate : 0,
+      progress: typeof b.progress === "number" ? b.progress : 0,
     };
+
     const [created] = await db.insert(campaigns).values(values).returning();
+
     return NextResponse.json({ campaign: created }, { status: 201 });
   } catch (error) {
     const errMsg = error instanceof Error ? error.message : 'Failed to create campaign';
@@ -61,5 +67,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: errMsg }, { status: 500 });
   }
 }
-
-
