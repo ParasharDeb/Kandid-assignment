@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextResponse,NextRequest } from "next/server";
 import { db } from "@/db/drizzle";
 import { campaigns } from "@/db/schema";
 import { eq } from "drizzle-orm";
@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 type CampaignSelect = typeof campaigns.$inferSelect;
 type CampaignInsert = typeof campaigns.$inferInsert;
 
-export async function PATCH(_request: Request, { params }: { params: { id: string } }) {
+export async function PATCH(_request: NextRequest, { params }: { params: { id: string } }) {
   try {
     const id = Number(params.id);
     const body: unknown = await _request.json();
