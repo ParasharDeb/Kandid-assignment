@@ -103,7 +103,7 @@ export default function LeftNavigation() {
         </Link>
       </div>
       <div className="mt-auto px-6">
-        <button onClick={handleLogout} disabled={loggingOut} className="w-full px-3 py-2 text-sm border rounded-md text-gray-600 hover:text-red-600 hover:border-red-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+        <button onClick={handleLogout} disabled={loggingOut} className="w-full px-3 py-2 text-sm border rounded-md text-gray-600 hover:text-red-600 hover:border-red-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer">
           {loggingOut && (
             <svg className="animate-spin h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>

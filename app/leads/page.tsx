@@ -7,7 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import LeftNavigation from "../maincomps/Leftnav";
 import { Button } from "@/components/ui/button";
 
-// Dummy Drizzle-style data; replace with actual DB queries
+// big TODO
+//TODO: Drizzle issue. Should not hardcode it should have a backend call wrote the logic 
+// something wrong with the Drizzle migration
+
 const LEADS = [
   {
     name: "Om Satyarthy",
@@ -17,6 +20,7 @@ const LEADS = [
     lastContact: "Sent 7 mins ago",
     activity: 5,
     email: "om.satyarthy@gynoveda.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/46.jpg",
     history: [
       { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
       { label: "Connection Status", message: "Check connection status" },
@@ -24,383 +28,162 @@ const LEADS = [
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
+    name: "Dr. Bhuvaneshwari",
+    designation: "Fertility Specialist",
     campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    status: "Contacted",
+    lastContact: "Sent 2 days ago",
+    activity: 3,
+    email: "bhuvaneshwari@gynoveda.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/12.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Invitation sent for partnership" },
+      { label: "Replied", message: "Interested to discuss" },
+    ],
+  },
+  // ... (existing leads)
+  
+  // New entries start here:
+  {
+    name: "Anjali Mehta",
+    designation: "Product Manager",
+    campaign: "HealthFirst",
+    status: "Responded",
+    lastContact: "Called yesterday",
+    activity: 4,
+    email: "anjali.mehta@healthfirst.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/5.jpg",
+    history: [
+      { label: "Invitation Request", message: "Requested product collaboration" },
+      { label: "Replied", message: "Scheduled meeting" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
+    name: "Rohit Sharma",
+    designation: "Sales Lead",
+    campaign: "Pokonut",
     status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    lastContact: "Sent 4 hours ago",
+    activity: 3,
+    email: "rohit.sharma@pokonut.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/3.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Invitation for sales partnership" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
+    name: "Priya Desai",
+    designation: "Marketing Director",
+    campaign: "Digi Sidekick",
+    status: "Converted",
+    lastContact: "Converted yesterday",
     activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    email: "priya.desai@digisidekick.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/8.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Marketing campaign discussion" },
+      { label: "Replied", message: "Signed contract" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    name: "Karan Kapoor",
+    designation: "Business Analyst",
+    campaign: "Re’equil",
+    status: "Followup",
+    lastContact: "Followup 30 mins ago",
+    activity: 4,
+    email: "karan.kapoor@reequil.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/9.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Business alliance inquiry" },
+      { label: "Replied", message: "Requested more info" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
+    name: "Sneha Kulkarni",
+    designation: "Customer Success",
     campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    status: "Contacted",
+    lastContact: "Sent 1 day ago",
+    activity: 3,
+    email: "sneha.kulkarni@gynoveda.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/14.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Customer feedback session invite" },
+      { label: "Replied", message: "Participated in feedback" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    name: "Manish Joshi",
+    designation: "Technical Lead",
+    campaign: "HealthFirst",
+    status: "Do Not Contact",
+    lastContact: "Sent 3 months ago",
+    activity: 1,
+    email: "manish.joshi@healthfirst.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/11.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Technical partnership invite" },
+      { label: "Connection Status", message: "No response" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    name: "Anita Rao",
+    designation: "HR Manager",
+    campaign: "Pokonut",
+    status: "Responded",
+    lastContact: "Called last week",
+    activity: 4,
+    email: "anita.rao@pokonut.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/20.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "HR collaboration request" },
+      { label: "Replied", message: "Interested in partnership" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
+    name: "Vikram Singh",
+    designation: "Operations Manager",
+    campaign: "The Skin Story",
+    status: "Followup",
+    lastContact: "Followup 15 mins ago",
     activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    email: "vikram.singh@skins.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/24.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Operations process integration" },
+      { label: "Replied", message: "Requested proposal" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
+    name: "Nisha Patel",
+    designation: "Content Strategist",
+    campaign: "Digi Sidekick",
     status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    lastContact: "Sent 1 hour ago",
+    activity: 3,
+    email: "nisha.patel@digisidekick.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/16.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Content collaboration invite" },
     ],
   },
   {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
+    name: "Aditya Verma",
+    designation: "Financial Advisor",
+    campaign: "Re’equil",
+    status: "Converted",
+    lastContact: "Converted 2 days ago",
     activity: 5,
-    email: "om.satyarthy@gynoveda.com",
+    email: "aditya.verma@reequil.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/32.jpg",
     history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },{
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
-    ],
-  },
-  {
-    name: "Om Satyarthy",
-    designation: "Regional Head",
-    campaign: "Gynoveda",
-    status: "Pending Approval",
-    lastContact: "Sent 7 mins ago",
-    activity: 5,
-    email: "om.satyarthy@gynoveda.com",
-    history: [
-      { label: "Invitation Request", message: "Hi Om, I'm building consultative AI ..." },
-      { label: "Connection Status", message: "Check connection status" },
-      { label: "Replied", message: "View Reply" },
+      { label: "Invitation Request", message: "Financial partnership offered" },
+      { label: "Replied", message: "Signed agreements" },
     ],
   },
 ];
+
 
 export default function LeadsSection() {
   const [selectedLead, setSelectedLead] = useState<number | null>(null);
@@ -451,7 +234,9 @@ export default function LeadsSection() {
                   >
                     <div className="w-64 flex items-center gap-3">
                       {/* Avatar Placeholder */}
-                      <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200" />
+                      <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200 overflow-hidden">
+                        <img src={lead.image} alt={`${lead.name} avatar`} className="w-11 h-11 rounded-full object-cover" />
+                      </div>
                       <div>
                         <div className="font-medium">{lead.name}</div>
                         <div className="text-xs text-gray-500">{lead.designation}</div>
@@ -506,7 +291,13 @@ export default function LeadsSection() {
                   <SheetTitle>
                     <div className="flex items-center gap-3">
                       {/* Avatar Placeholder */}
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200" />
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200 overflow-hidden">
+                        <img
+                          src={filteredLeads[selectedLead].image}
+                          alt={`${filteredLeads[selectedLead].name} avatar`}
+                          className="w-14 h-14 rounded-full object-cover"
+                        />
+                      </div>
                       <div>
                         <div className="font-semibold text-lg">
                           {filteredLeads[selectedLead].name}
@@ -542,7 +333,9 @@ export default function LeadsSection() {
                         {filteredLeads[selectedLead].history.map((step, i) => (
                           <div key={i} className="mb-8 relative">
                             <div className="absolute -left-6 top-1">
-                              <div className="w-4 h-4 bg-white border-2 border-violet-300 rounded-full" />
+                              <div className="w-4 h-4 bg-white border-2 border-violet-300 rounded-full" >
+                                
+                              </div>
                             </div>
                             <div className="font-semibold text-violet-600">{step.label}</div>
                             <div className="text-sm text-gray-600 mt-1">
