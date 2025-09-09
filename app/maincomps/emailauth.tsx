@@ -47,8 +47,7 @@ export default function EmailAuth() {
             Router.push("/dashboard");
           } catch (err) {
             setError("Invalid email or password.");
-            // eslint-disable-next-line no-console
-            console.error(err);
+            console.error(err); // removed eslint-disable
           } finally {
             setIsSubmitting(false);
           }

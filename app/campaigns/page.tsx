@@ -43,7 +43,7 @@ export default function CampaignsPage() {
 
   useEffect(() => {
     fetchCampaigns({ status, search });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // removed eslint-disable-next-line react-hooks/exhaustive-deps
   }, [status, search]);
 
   // Filtered & searched list (replace with dynamic data as per your setup)

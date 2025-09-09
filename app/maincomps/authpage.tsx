@@ -34,8 +34,7 @@ export default function Authpage() {
               } catch (err) {
                 const message = err instanceof Error ? err.message : "Google sign-in failed.";
                 setError(message);
-                // eslint-disable-next-line no-console
-                console.error(err);
+                console.error(err); // removed eslint-disable
               } finally {
                 setIsSubmitting(false);
               }

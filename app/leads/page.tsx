@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import LeftNavigation from "../maincomps/Leftnav";
 import { Button } from "@/components/ui/button";
 
+
 // big TODO
 //TODO: Drizzle issue. Should not hardcode it should have a backend call wrote the logic 
 // something wrong with the Drizzle migration
@@ -192,7 +193,13 @@ export default function LeadsSection() {
                     <div className="w-64 flex items-center gap-3">
                       {/* Avatar Placeholder */}
                       <div className="w-11 h-11 rounded-full bg-gradient-to-tr from-blue-200 to-indigo-200 overflow-hidden">
-                        <img src={lead.image} alt={`${lead.name} avatar`} className="w-11 h-11 rounded-full object-cover" />
+                        <img
+                          src={lead.image}
+                          alt={`${lead.name} avatar`}
+                          width={44}
+                          height={44}
+                          className="w-11 h-11 rounded-full object-cover"
+                        />
                       </div>
                       <div>
                         <div className="font-medium">{lead.name}</div>
@@ -241,7 +248,7 @@ export default function LeadsSection() {
 
         {/* Side Sheet for Lead Details */}
         <Sheet open={selectedLead !== null} onOpenChange={() => setSelectedLead(null)}>
-          <SheetContent position="right" size="md" className="p-0">
+          <SheetContent side="right" className="p-0">
             {selectedLead !== null && (
               <div className="h-full w-full flex flex-col">
                 <SheetHeader className="px-7 pt-8 pb-2 border-b">
@@ -252,9 +259,11 @@ export default function LeadsSection() {
                         <img
                           src={filteredLeads[selectedLead].image}
                           alt={`${filteredLeads[selectedLead].name} avatar`}
+                          width={56}
+                          height={56}
                           className="w-14 h-14 rounded-full object-cover"
                         />
-                        </div>
+                      </div>
                       <div>
                         <div className="font-semibold text-lg">
                           {filteredLeads[selectedLead].name}
