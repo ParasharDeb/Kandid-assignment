@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, integer, pgEnum, serial, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, integer, pgEnum, serial, varchar,jsonb } from "drizzle-orm/pg-core";
 export const campaignStatus = pgEnum("campaign_status", [
   "Draft",
   "Active",
@@ -75,11 +75,23 @@ export const campaigns = pgTable("campaigns", {
 });
 
 export const Leads = pgTable("leads", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  title: text("title").notNull(),
-  campaignName: text("campaign_name").notNull(),
-  additionalInfo: text("additional_info").notNull(),
-  status: text("status").notNull(),
+  id: serial("id").primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  designation: varchar("designation", { length: 255 }),
+  campaign: varchar("campaign", { length: 100 }),
+  status: varchar("status", { length: 50 }),
+  lastContact: varchar("last_contact", { length: 50 }),
+  activity: integer("activity"),
+  email: varchar("email", { length: 255 }),
+  
+  historyId: integer("history_id").unique().references(() => lead_history.id),
+});
+
+// History table (one-to-one per lead)
+export const lead_history = pgTable("lead_history", {
+  id: serial("id").primaryKey(),
+  // Array of timeline items as JSON
+  historyEvents: jsonb("history_events").notNull(), // Each event: { label: string, message: string }
+  createdAt: timestamp("created_at").defaultNow(),
 });
 export const schema={user,session,account,verification,campaigns,Leads};

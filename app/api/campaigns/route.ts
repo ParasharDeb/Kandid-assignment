@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { db } from "@/db/drizzle";
 import { campaigns } from "@/db/schema";
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function GET(request: Request) {
   try {
@@ -21,6 +23,7 @@ export async function GET(request: Request) {
 
     return NextResponse.json({ campaigns: results });
   } catch (error) {
+    console.error('[GET /api/campaigns] error', error);
     return NextResponse.json({ error: "Failed to fetch campaigns" }, { status: 500 });
   }
 }

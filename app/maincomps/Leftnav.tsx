@@ -1,8 +1,22 @@
 'use client'
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+import { useState } from "react";
 export default function LeftNavigation() {
   const Router=useRouter();
+  const [loggingOut, setLoggingOut] = useState(false);
+  const handleLogout = async () => {
+    if (loggingOut) return;
+    setLoggingOut(true);
+    try {
+      await authClient.signOut();
+      Router.push('/');
+    } catch (e) {
+      console.error('Logout failed', e);
+      setLoggingOut(false);
+    }
+  };
   return (
     <aside className="bg-white h-screen w-64 shadow-lg flex flex-col py-6">
       {/* Logo */}
@@ -59,6 +73,17 @@ export default function LeftNavigation() {
         <div className="text-xs text-gray-400 mb-1">Admin Panel</div>
         <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm">Activity logs</Link>
         <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm">User logs</Link>
+      </div>
+      <div className="mt-auto px-6">
+        <button onClick={handleLogout} disabled={loggingOut} className="w-full px-3 py-2 text-sm border rounded-md text-gray-600 hover:text-red-600 hover:border-red-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+          {loggingOut && (
+            <svg className="animate-spin h-4 w-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+            </svg>
+          )}
+          {loggingOut ? 'Logging out…' : 'Logout'}
+        </button>
       </div>
       
     </aside>
