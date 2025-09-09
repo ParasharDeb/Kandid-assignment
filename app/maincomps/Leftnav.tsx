@@ -3,6 +3,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
 import { useState } from "react";
+import DashboardIcon from "../icons/dashboard";
+import LeadsIcon from "../icons/leads";
+import CampaignIcon from "../icons/campaign";
+import MessageIcon from "../icons/message";
+import EnvelopeIcon from "../icons/envelope";
+import SettingsIcon from "../icons/settings";
+import ActivityIcon from "../icons/activity";
+import UserlogIcon from "../icons/userlog";
 export default function LeftNavigation() {
   const Router=useRouter();
   const [loggingOut, setLoggingOut] = useState(false);
@@ -43,36 +51,56 @@ export default function LeftNavigation() {
         <ul className="space-y-1 text-sm">
           <li>
             <Link href="#" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+              <DashboardIcon />
               Dashboard
             </Link>
           </li>
           <li>
-            <Link href="/leads" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md" >Leads</Link>
+            <Link href="/leads" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md" >
+              <LeadsIcon />
+              Leads
+            </Link>
           </li>
           <li>
-            <Link href="/campaigns" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">Campaign</Link>
+            <Link href="/campaigns" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+              <CampaignIcon />
+              Campaign
+            </Link>
           </li>
           <li>
             <Link href="/messages" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+              <MessageIcon />
               Messages
               
             </Link>
           </li>
           <li>
-            <Link href="#" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">LinkedIn Accounts</Link>
+            <Link href="#" className="flex items-center px-3 py-2 gap-2 text-gray-700 hover:bg-blue-100 hover:text-blue-600 rounded-md">
+              <EnvelopeIcon />
+              LinkedIn Accounts
+            </Link>
           </li>
         </ul>
       </nav>
       {/* Settings */}
       <div className="px-6 mb-4">
         <div className="text-xs text-gray-400 mb-1">Settings</div>
-        <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm">Setting & Billing</Link>
+        <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm flex items-center gap-2">
+          <SettingsIcon />
+          Setting & Billing
+        </Link>
       </div>
       {/* Admin Panel */}
       <div className="px-6 mb-4">
         <div className="text-xs text-gray-400 mb-1">Admin Panel</div>
-        <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm">Activity logs</Link>
-        <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm">User logs</Link>
+        <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm flex items-center gap-2">
+          <ActivityIcon />
+          Activity logs
+        </Link>
+        <Link href="#" className="block px-3 py-2 rounded-md hover:bg-blue-100 hover:text-blue-700 text-gray-700 text-sm flex items-center gap-2">
+          <UserlogIcon />
+          User logs
+        </Link>
       </div>
       <div className="mt-auto px-6">
         <button onClick={handleLogout} disabled={loggingOut} className="w-full px-3 py-2 text-sm border rounded-md text-gray-600 hover:text-red-600 hover:border-red-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2">

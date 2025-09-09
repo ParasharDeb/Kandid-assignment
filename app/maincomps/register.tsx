@@ -52,13 +52,13 @@ export default function Register() {
           }
           setIsSubmitting(true);
           try {
+            //@ts-ignore
             await signUp(cleanEmail, cleanPassword, cleanFirst, cleanLast);
             // On success, send user to login screen
             showOnly("email");
           } catch (err) {
             const message = err instanceof Error ? err.message : "Registration failed.";
             setError(message);
-            // eslint-disable-next-line no-console
             console.error(err);
           } finally {
             setIsSubmitting(false);
