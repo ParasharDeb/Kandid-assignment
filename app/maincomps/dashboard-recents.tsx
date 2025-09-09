@@ -4,17 +4,17 @@ type Activity = {
   name: string;
   role: string;
   status: string;
+  image: string;
 };
 
 const activities: Activity[] = [
-  { name: "Om Satyarthy", role: "Regional Head",status: "Pending Approval" },
-  { name: "Dr. Bhuvaneshwari", role: "Fertility & Women's Health + A...", status: "Sent 7 mins ago" },
-  { name: "Surdeep Singh", role: "Building Product-led SEO Growt...",  status: "Sent 7 mins ago" },
-  { name: "Dilbag Singh", role: "Manager Marketing & Communicat...", status: "Sent 7 mins ago" },
-  { name: "Vanshy Jain", role: "Ayurvedal|primary infertility|...",  status: "Sent 7 mins ago" },
-  { name: "Sunil Pal", role: "Helping Fashion & Lifestyle Br...",status: "Pending Approval" },
-  { name: "Utkarsh K.", role: "Airbnb Host | Ex-The Skin Story", status: "Do Not Contact" },
-  
+  { name: "Om Satyarthy", role: "Regional Head", status: "Pending Approval", image: "https://xsgames.co/randomusers/assets/avatars/male/46.jpg" },
+  { name: "Dr. Bhuvaneshwari", role: "Fertility & Women's Health + A...", status: "Sent 7 mins ago", image: "https://xsgames.co/randomusers/assets/avatars/female/12.jpg" },
+  { name: "Surdeep Singh", role: "Building Product-led SEO Growt...", status: "Sent 7 mins ago", image: "https://xsgames.co/randomusers/assets/avatars/male/30.jpg" },
+  { name: "Dilbag Singh", role: "Manager Marketing & Communicat...", status: "Sent 7 mins ago", image: "https://xsgames.co/randomusers/assets/avatars/male/8.jpg" },
+  { name: "Vanshy Jain", role: "Ayurvedal|primary infertility|...", status: "Sent 7 mins ago", image: "https://xsgames.co/randomusers/assets/avatars/male/15.jpg" },
+  { name: "Sunil Pal", role: "Helping Fashion & Lifestyle Br...", status: "Pending Approval", image: "https://xsgames.co/randomusers/assets/avatars/male/17.jpg" },
+  { name: "Utkarsh K.", role: "Airbnb Host | Ex-The Skin Story", status: "Do Not Contact", image: "https://xsgames.co/randomusers/assets/avatars/male/25.jpg" },
 ];
 
 export default function RecentDashboard() {
@@ -27,12 +27,14 @@ export default function RecentDashboard() {
       <ul>
         {activities.map((a, idx) => (
           <li key={idx} className="flex items-center py-3 border-b last:border-b-0 gap-4">
-            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center"/>
+            <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
+              <img src={a.image} alt={`${a.name} avatar`} className="w-7 h-7 object-cover rounded-full" />
+            </div>
             <div className="flex flex-col flex-1">
               <span className="font-medium text-gray-700">{a.name}</span>
               <span className="text-xs text-gray-400">{a.role}</span>
             </div>
-      
+
             {a.status === "Pending Approval" ? (
               <span className="px-3 py-1 rounded-md bg-purple-100 text-purple-600 text-xs flex items-center gap-1">
                 <svg width="12" height="12" fill="currentColor" className="mr-1">

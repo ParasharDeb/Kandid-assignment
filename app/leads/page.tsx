@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 //TODO: Drizzle issue. Should not hardcode it should have a backend call wrote the logic 
 // something wrong with the Drizzle migration
 
+
 const LEADS = [
   {
     name: "Om Satyarthy",
@@ -41,145 +42,101 @@ const LEADS = [
       { label: "Replied", message: "Interested to discuss" },
     ],
   },
-  // ... (existing leads)
-  
-  // New entries start here:
   {
-    name: "Anjali Mehta",
-    designation: "Product Manager",
-    campaign: "HealthFirst",
-    status: "Responded",
-    lastContact: "Called yesterday",
-    activity: 4,
-    email: "anjali.mehta@healthfirst.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/5.jpg",
-    history: [
-      { label: "Invitation Request", message: "Requested product collaboration" },
-      { label: "Replied", message: "Scheduled meeting" },
-    ],
-  },
-  {
-    name: "Rohit Sharma",
-    designation: "Sales Lead",
-    campaign: "Pokonut",
-    status: "Pending Approval",
-    lastContact: "Sent 4 hours ago",
-    activity: 3,
-    email: "rohit.sharma@pokonut.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/3.jpg",
-    history: [
-      { label: "Invitation Request", message: "Invitation for sales partnership" },
-    ],
-  },
-  {
-    name: "Priya Desai",
-    designation: "Marketing Director",
-    campaign: "Digi Sidekick",
-    status: "Converted",
-    lastContact: "Converted yesterday",
-    activity: 5,
-    email: "priya.desai@digisidekick.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/8.jpg",
-    history: [
-      { label: "Invitation Request", message: "Marketing campaign discussion" },
-      { label: "Replied", message: "Signed contract" },
-    ],
-  },
-  {
-    name: "Karan Kapoor",
-    designation: "Business Analyst",
-    campaign: "Re’equil",
-    status: "Followup",
-    lastContact: "Followup 30 mins ago",
-    activity: 4,
-    email: "karan.kapoor@reequil.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/9.jpg",
-    history: [
-      { label: "Invitation Request", message: "Business alliance inquiry" },
-      { label: "Replied", message: "Requested more info" },
-    ],
-  },
-  {
-    name: "Sneha Kulkarni",
-    designation: "Customer Success",
+    name: "Surdeep Singh",
+    designation: "SEO Product Lead",
     campaign: "Gynoveda",
-    status: "Contacted",
-    lastContact: "Sent 1 day ago",
-    activity: 3,
-    email: "sneha.kulkarni@gynoveda.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/14.jpg",
+    status: "Responded",
+    lastContact: "Followup 5 hours ago",
+    activity: 4,
+    email: "surdeep.singh@gynoveda.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/30.jpg",
     history: [
-      { label: "Invitation Request", message: "Customer feedback session invite" },
-      { label: "Replied", message: "Participated in feedback" },
+      { label: "Invitation Request", message: "Request sent for SEO insights" },
+      { label: "Connection Status", message: "Pending acceptance" },
     ],
   },
   {
-    name: "Manish Joshi",
-    designation: "Technical Lead",
+    name: "Dilbag Singh",
+    designation: "Marketing Manager",
+    campaign: "Gynoveda",
+    status: "Converted",
+    lastContact: "Converted last week",
+    activity: 5,
+    email: "dilbag.singh@email.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/8.jpg",
+    history: [
+      { label: "Invitation Request", message: "Marketing collaboration invite" },
+      { label: "Replied", message: "Agreed to campaign" },
+    ],
+  },
+  {
+    name: "Vanshy Jain",
+    designation: "Ayurveda Specialist",
     campaign: "HealthFirst",
     status: "Do Not Contact",
-    lastContact: "Sent 3 months ago",
-    activity: 1,
-    email: "manish.joshi@healthfirst.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/11.jpg",
+    lastContact: "Sent 1 month ago",
+    activity: 2,
+    email: "vanshy.jain@healthfirst.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/15.jpg",
     history: [
-      { label: "Invitation Request", message: "Technical partnership invite" },
-      { label: "Connection Status", message: "No response" },
+      { label: "Invitation Request", message: "Consultation request sent" },
+      { label: "Connection Status", message: "No response received" },
     ],
   },
   {
-    name: "Anita Rao",
-    designation: "HR Manager",
-    campaign: "Pokonut",
-    status: "Responded",
-    lastContact: "Called last week",
-    activity: 4,
-    email: "anita.rao@pokonut.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/20.jpg",
-    history: [
-      { label: "Invitation Request", message: "HR collaboration request" },
-      { label: "Replied", message: "Interested in partnership" },
-    ],
-  },
-  {
-    name: "Vikram Singh",
-    designation: "Operations Manager",
-    campaign: "The Skin Story",
-    status: "Followup",
-    lastContact: "Followup 15 mins ago",
-    activity: 5,
-    email: "vikram.singh@skins.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/24.jpg",
-    history: [
-      { label: "Invitation Request", message: "Operations process integration" },
-      { label: "Replied", message: "Requested proposal" },
-    ],
-  },
-  {
-    name: "Nisha Patel",
-    designation: "Content Strategist",
+    name: "Sunil Pal",
+    designation: "Fashion Brand Consultant",
     campaign: "Digi Sidekick",
     status: "Pending Approval",
-    lastContact: "Sent 1 hour ago",
+    lastContact: "Sent 3 days ago",
     activity: 3,
-    email: "nisha.patel@digisidekick.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/female/16.jpg",
+    email: "sunil.pal@digisidekick.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/17.jpg",
     history: [
-      { label: "Invitation Request", message: "Content collaboration invite" },
+      { label: "Invitation Request", message: "Brand collaboration invite" },
     ],
   },
   {
-    name: "Aditya Verma",
-    designation: "Financial Advisor",
-    campaign: "Re’equil",
-    status: "Converted",
-    lastContact: "Converted 2 days ago",
-    activity: 5,
-    email: "aditya.verma@reequil.com",
-    image: "https://xsgames.co/randomusers/assets/avatars/male/32.jpg",
+    name: "Utarsh K",
+    designation: "Airbnb Host",
+    campaign: "The Skin Story",
+    status: "Do Not Contact",
+    lastContact: "Sent 2 weeks ago",
+    activity: 1,
+    email: "utarsh.k@skins.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/25.jpg",
     history: [
-      { label: "Invitation Request", message: "Financial partnership offered" },
-      { label: "Replied", message: "Signed agreements" },
+      { label: "Invitation Request", message: "Partnership proposal sent" },
+      { label: "Replied", message: "Not interested" },
+    ],
+  },
+  {
+    name: "Shreya Ramakrishna",
+    designation: "Deputy Manager",
+    campaign: "Pokonut",
+    status: "Followup",
+    lastContact: "Followup 10 mins ago",
+    activity: 4,
+    email: "shreya.ramk@pokonut.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/female/21.jpg",
+    history: [
+      { label: "Invitation Request", message: "Initial contact established" },
+      { label: "Replied", message: "Requested demo" },
+    ],
+  },
+  {
+    name: "Deepak Kumar",
+    designation: "Advertising Head",
+    campaign: "Re’equil",
+    status: "Followup",
+    lastContact: "Followup 20 mins ago",
+    activity: 5,
+    email: "deepak.kumar@reequil.com",
+    image: "https://xsgames.co/randomusers/assets/avatars/male/40.jpg",
+    history: [
+      { label: "Invitation Request", message: "Advertising opportunity introduced" },
+      { label: "Replied", message: "Scheduling meeting" },
     ],
   },
 ];
@@ -297,7 +254,7 @@ export default function LeadsSection() {
                           alt={`${filteredLeads[selectedLead].name} avatar`}
                           className="w-14 h-14 rounded-full object-cover"
                         />
-                      </div>
+                        </div>
                       <div>
                         <div className="font-semibold text-lg">
                           {filteredLeads[selectedLead].name}
