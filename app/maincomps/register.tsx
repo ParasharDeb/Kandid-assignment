@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Eyeicon } from "../icons/eye";
@@ -8,12 +8,12 @@ import { signUp } from "@/server/users";
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const showOnly = useAuthStore((state) => state.showOnly);
-  const [firstname,setFirstName]=useState("")
-  const [lastname,setlastName]=useState("")
-  const [password,setPassword]=useState("")
-  const [email,setEmail]=useState("")
-  const [error, setError] = useState<string | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setlastName] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -35,49 +35,57 @@ export default function Register() {
           Register using your email address.
         </p>
 
-        <form className="flex flex-col gap-4" onSubmit={async (e) => {
-          e.preventDefault();
-          setError(null);
-          const cleanFirst = firstname.trim();
-          const cleanLast = lastname.trim();
-          const cleanEmail = email.trim();
-          const cleanPassword = password.trim();
-          if (!cleanFirst || !cleanLast || !cleanEmail || !cleanPassword) {
-            setError("All fields are required.");
-            return;
-          }
-          if (cleanPassword.length < 6) {
-            setError("Password must be at least 6 characters.");
-            return;
-          }
-          setIsSubmitting(true);
-          try {
-            //@ts-ignore
-            await signUp(cleanEmail, cleanPassword, cleanFirst, cleanLast);
-            // On success, send user to login screen
-            showOnly("email");
-          } catch (err) {
-            const message = err instanceof Error ? err.message : "Registration failed.";
-            setError(message);
-            console.error(err);
-          } finally {
-            setIsSubmitting(false);
-          }
-        }}>
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={async (e) => {
+            e.preventDefault();
+            setError(null);
+            const cleanFirst = firstname.trim();
+            const cleanLast = lastname.trim();
+            const cleanEmail = email.trim();
+            const cleanPassword = password.trim();
+            if (!cleanFirst || !cleanLast || !cleanEmail || !cleanPassword) {
+              setError("All fields are required.");
+              return;
+            }
+            if (cleanPassword.length < 6) {
+              setError("Password must be at least 6 characters.");
+              return;
+            }
+            setIsSubmitting(true);
+            try {
+              // Combine first and last name for the name field
+              const fullName = `${cleanFirst} ${cleanLast}`.trim();
+              await signUp(cleanEmail, cleanPassword, fullName);
+              showOnly("email");
+            } catch (err) {
+              const message =
+                err instanceof Error ? err.message : "Registration failed.";
+              setError(message);
+              console.error(err);
+            } finally {
+              setIsSubmitting(false);
+            }
+          }}
+        >
           <div className="flex gap-3">
             <input
               type="text"
               placeholder="First Name"
               className="border border-gray-300 rounded-lg px-3 py-2 w-1/2 text-sm"
               value={firstname}
-              onChange={(e)=>{setFirstName(e.target.value)}}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
             />
             <input
               type="text"
               placeholder="Last Name"
               className="border border-gray-300 rounded-lg px-3 py-2 w-1/2 text-sm"
               value={lastname}
-              onChange={(e)=>{setlastName(e.target.value)}}
+              onChange={(e) => {
+                setlastName(e.target.value);
+              }}
             />
           </div>
           <input
@@ -85,8 +93,9 @@ export default function Register() {
             placeholder="Email"
             className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm"
             value={email}
-            onChange={(e)=>{setEmail(e.target.value)}}
-
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
           />
           <div className="relative w-full">
             <input
@@ -94,7 +103,9 @@ export default function Register() {
               placeholder="Password"
               className="border border-gray-300 rounded-lg px-3 py-2 w-full text-sm pr-10"
               value={password}
-              onChange={(e)=>{setPassword(e.target.value)}}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <span
               onClick={togglePasswordVisibility}
@@ -110,9 +121,15 @@ export default function Register() {
             </span>
           </div>
           {error && (
-            <p className="text-red-600 text-sm" role="alert">{error}</p>
+            <p className="text-red-600 text-sm" role="alert">
+              {error}
+            </p>
           )}
-          <Button className="w-full bg-blue-700 hover:bg-blue-700 text-white rounded-full mt-2" type="submit" disabled={isSubmitting}>
+          <Button
+            className="w-full bg-blue-700 hover:bg-blue-700 text-white rounded-full mt-2"
+            type="submit"
+            disabled={isSubmitting}
+          >
             {isSubmitting ? "Creating..." : "Create my account"}
           </Button>
         </form>
