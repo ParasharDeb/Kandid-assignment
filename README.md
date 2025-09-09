@@ -1,4 +1,4 @@
-# Project README
+# Kandid Assignment README
 
 ## Overview
 This is a full-stack web application built with **Next.js** using the framework for both frontend and backend development. It manages campaigns and leads with dynamic real-time data fetching, filtering, and CRUD operations. The app integrates authentication, database management, and third-party OAuth login.
@@ -15,51 +15,59 @@ The project leverages:
 - Responsive UI design with Tailwind CSS and shadcn components
 - API routes built into Next.js backend
 
-## Environment Variables
+# Installation Process
 
-Create a file `.env.local` in your project root with the following content (replace values if needed):
+1. Clone the repository:
 
-Authentication config for Better Auth
-BETTER_AUTH_SECRET="better-auth-secret"
-BETTER_AUTH_URL="better-auth-url"
+git clone https://github.com/ParasharDeb/Kandid-assignment.git
 
-PostgreSQL connection string to Neon database
-DATABASE_URL="Database url"
 
-Google OAuth credentials
-GOOGLE_CLIENT_ID="google client id"
-GOOGLE_CLIENT_SECRET="Google client store"
+2. Change directory:
 
-> **Important:** Do not commit `.env.local` to version control. Instead, distribute an `.env.example` file with placeholder values.
+cd Kandid-assignment
 
-## Installation and Setup
 
-1. Install dependencies:
+3. Install dependencies:
 
 npm install
 
+4.Environment Variables
 
-2. Run database migrations with Drizzle Kit:
+Create a file `.env.local` in your project root with the following content (replace values if needed):
+
+Authentication config for Better Auth  
+BETTER_AUTH_SECRET="better-auth-secret"  
+BETTER_AUTH_URL="better-auth-url"  
+
+PostgreSQL connection string to Neon database  
+DATABASE_URL="Database url"  
+
+Google OAuth credentials  
+GOOGLE_CLIENT_ID="google client id"  
+GOOGLE_CLIENT_SECRET="Google client store"  
+
+> **Important:** Do not commit `.env.local` to version control. Instead, distribute an `.env.example` file with placeholder values.
+
+
+5. Run database migrations with Drizzle Kit:
+
 
 npx drizzle-kit migrate
 
 
-3. Start the development server:
+6. Start the development server:
 
 npm run dev
 
-
-4. Open your browser and go to [http://localhost:3000](http://localhost:3000) to use the app.
+7.Open your browser and go to [http://localhost:3000](http://localhost:3000) to use the app.
 
 ## Available Scripts
-
 - `npm run dev` — Starts development server with hot reload
 - `npm run build` — Builds production assets
 - `npm run start` — Starts production server
 - `npx drizzle-kit migrate` — Runs database migrations
 
 ## Folder Structure
-
 - `app/` — Next.js routes and pages (frontend + backend API)
 - `db/` — Drizzle ORM schema and database utility files
 - `maincomps/` — Shared React components like navigation
@@ -67,7 +75,6 @@ npm run dev
 - `icons/` — SVG icons components
 
 ## Technologies
-
 - **Next.js** — Full-stack React framework for frontend and backend
 - **Drizzle ORM** — Type-safe database access for PostgreSQL
 - **shadcn/ui** — Headless UI components with Tailwind CSS
@@ -76,9 +83,7 @@ npm run dev
 - **Google OAuth** — OAuth 2.0 login
 
 ## Contact & Support
-
-For any questions, issues, or support requests, please contact:
-
+For any questions, issues, or support requests, please contact:  
 [debparashar76@gmail.com](mailto:debparashar76@gmail.com)
 
 ---
